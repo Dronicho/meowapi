@@ -1,1 +1,1 @@
-web: gunicorn news.wsgi --log-level=info --log-file -
+web: gunicorn meowapi.wsgi --log-level=info --log-file -
