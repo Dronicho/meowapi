@@ -36,7 +36,17 @@ SECRET_KEY = '=t+rtlif5a+2a!*_10l%mzjb3f@+$5)1+95^u5weg217m7fxos'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'meowapi.herokuapp.com',
+    'localhost:8080',
+    'localhost:8000'
+]
+
+CORS_ORIGIN_WHITELIST =[
+    'meowapi.herokuapp.com',
+    'localhost:8080',
+    'localhost:8000'
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
