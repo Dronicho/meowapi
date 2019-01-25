@@ -24,8 +24,7 @@ if os.path.isfile(dotenv_file):
 
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES = {}
-DATABASES['default'] = db_from_env
+DATABASES = {'default': db_from_env}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
