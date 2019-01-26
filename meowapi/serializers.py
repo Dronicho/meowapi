@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User, Group
 from django.db import models
-# from .models import News
+from .models import Article
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    password = models.CharField(max_length=15)
+    password = serializers.CharField(max_length=15)
 
     def create(self, data):
         user = User.objects.create(
@@ -32,8 +32,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-#
-# class NewsSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model = News
-#         fields = ('url', 'pub_date', 'title', 'summary', 'tags')
+
+class ArticleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Article
+        fields = '__all__'

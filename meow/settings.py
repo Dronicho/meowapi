@@ -29,7 +29,7 @@ DATABASES['default'] = db_from_env
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
+CSRF_COOKIE_NAME = "csrftoken"
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=t+rtlif5a+2a!*_10l%mzjb3f@+$5)1+95^u5weg217m7fxos'
 
@@ -42,7 +42,7 @@ ALLOWED_HOSTS = [
     'localhost:8000',
     '127.0.0.1'
 ]
-
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST =[
     'meowapi.herokuapp.com',
     'localhost:8080',
@@ -54,14 +54,19 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 
 # Application definition
 
+
+
 INSTALLED_APPS = [
+    'rest_framework',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,7 +74,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'meowapi'
 ]
 
@@ -104,7 +108,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'meow.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

@@ -21,10 +21,11 @@ from meowapi import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
-# router.register(r'news', views.NewsSerializer)
+router.register(r'articles', views.ArticleViewSet, basename='article')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api/', include(router.urls)),
+    path('login/', views.api_login)
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
