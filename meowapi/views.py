@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Group
+from .models import News
 from rest_framework import viewsets
-from meowapi.serializers import UserSerializer, GroupSerializer
+from meowapi.serializers import UserSerializer, GroupSerializer#, NewsSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -17,3 +18,13 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+#
+# class NewsViewSet(viewsets.ModelViewSet):
+#     """
+#     API to view and edit news
+#     """
+#     queryset = News.objects.all().order_by('-pub_date')
+#     serializer_class = NewsSerializer
+
+
