@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
     'meowapi.herokuapp.com',
     'localhost:8080',
     'localhost:8000',
-    '127.0.0.1'
+    '127.0.0.1',
+    '5.140.86.23'
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -48,7 +49,8 @@ CORS_ORIGIN_WHITELIST =[
     'meowapi.herokuapp.com',
     'localhost:8080',
     'localhost:8000',
-    '127.0.0.1'
+    '127.0.0.1',
+    '5.140.86.23'
 ]
 
 REST_FRAMEWORK = {
