@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 
@@ -34,10 +35,15 @@ class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all().order_by('-pub_date')
     serializer_class = ArticleSerializer
 
-    @action(methods=['get'], detail=True, url_path='<string:theme>', name='theme')
-    def get_articles_by_theme(self, request, pk, theme=None):
-        articles = Article.objects.get(pk=pk)
-        return Response(articles)
+    @action(methods=['get'], detail=False, url_path='theme/(?P<theme>[a-z0-9]+)', name='theme')
+    def get_articles_by_theme(self, request, theme=None):
+        articles = Article.objects.filter(theme=theme).order_by('-pub_date')
+        c = {
+            'request': request
+        }
+        serializer = self.serializer_class(articles, many=True, context=c)
+
+        return Response(serializer.data)
 
 
 class get_articles_by_theme(APIView):
