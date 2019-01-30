@@ -2,9 +2,10 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
 
 from meowapi.serializers import UserSerializer, GroupSerializer, ArticleSerializer
 from .models import Article
@@ -32,6 +33,21 @@ class ArticleViewSet(viewsets.ModelViewSet):
     """
     queryset = Article.objects.all().order_by('-pub_date')
     serializer_class = ArticleSerializer
+
+    @action(methods=['get'], detail=True, url_path='<string:theme>', name='theme')
+    def get_articles_by_theme(self, request, pk, theme=None):
+        articles = Article.objects.get(pk=pk)
+        return Response(articles)
+
+
+class get_articles_by_theme(APIView):
+    """
+    View to get news by theme name
+    """
+
+    def get(self, theme, format=None):
+        articles = Article.objects.filter(theme=theme)
+        return Response(articles)
 
 
 @api_view(['POST'])

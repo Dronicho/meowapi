@@ -41,7 +41,8 @@ ALLOWED_HOSTS = [
     'localhost:8080',
     'localhost:8000',
     '127.0.0.1',
-    '5.140.86.23'
+    '5.140.86.23',
+    'meownews.herokuapp.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -50,7 +51,8 @@ CORS_ORIGIN_WHITELIST =[
     'localhost:8080',
     'localhost:8000',
     '127.0.0.1',
-    '5.140.86.23'
+    '5.140.86.23',
+    'meownews.herokuapp.com'
 ]
 
 REST_FRAMEWORK = {
