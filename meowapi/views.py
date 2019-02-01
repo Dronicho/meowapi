@@ -4,9 +4,9 @@ from django.contrib.auth import authenticate, login
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
-from rest_framework.request import Request
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.mixins import RetrieveModelMixin
 
 from meowapi.serializers import UserSerializer, GroupSerializer, ArticleSerializer
 from .models import Article
@@ -44,6 +44,14 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(articles, many=True, context=c)
 
         return Response(serializer.data)
+
+
+# class RecommendView(APIView, RetrieveModelMixin):
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = ArticleSerializer
+#
+#     def get(self, pk):
+#         return 'WOW'
 
 
 class get_articles_by_theme(APIView):
