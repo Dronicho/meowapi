@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-# from rest_framework.authtoken import views as authviews
+from rest_framework.authtoken import views as authviews
 from meowapi import views
 
 router = routers.DefaultRouter()
@@ -27,12 +27,12 @@ router.register(r'articles', views.ArticleViewSet, basename='article')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    # path('api-token-auth/', authviews.obtain_auth_token),
-    # path('api/recommend/<int:pk>/', views.RecommendView.as_view())
+    path('api-token-auth/', authviews.obtain_auth_token),
+    path('api/recommend/<int:pk>/', views.RecommendView.as_view())
 ]
 
-# from django.contrib.auth.models import User
-# from rest_framework.authtoken.models import Token
-#
-# for user in User.objects.all():
-#     Token.objects.get_or_create(user=user)
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+
+for user in User.objects.all():
+    Token.objects.get_or_create(user=user)

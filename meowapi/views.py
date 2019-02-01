@@ -46,12 +46,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-# class RecommendView(APIView, RetrieveModelMixin):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = ArticleSerializer
-#
-#     def get(self, pk):
-#         return 'WOW'
+class RecommendView(APIView, RetrieveModelMixin):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ArticleSerializer
+
+    def get(self, pk):
+        return 'WOW'
 
 
 class get_articles_by_theme(APIView):

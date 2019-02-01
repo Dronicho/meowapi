@@ -1,7 +1,7 @@
 from django.db import models
-# from django.contrib.auth.models import User
-# from django.dispatch import receiver
-# from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 import datetime
 
 
@@ -13,10 +13,10 @@ class Article(models.Model):
     theme = models.CharField(max_length=100, default='none')
 
 
-# @receiver(models.signals.post_save, sender=User)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
+@receiver(models.signals.post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 # create token for existing users if they have no one
