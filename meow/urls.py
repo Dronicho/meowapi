@@ -27,7 +27,7 @@ router.register(r'articles', views.ArticleViewSet, basename='article')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api-token-auth/', authviews.obtain_auth_token),
+    # path('api-token-auth/', authviews.obtain_auth_token),
     # path('api/recommend/<int:pk>/', views.RecommendView.as_view())
 ]
 
