@@ -28,7 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-token-auth/', authviews.obtain_auth_token),
-    path('api/recommend/<int:pk>/', views.RecommendView.as_view())
+    path('api/recommend/<int:pk>/', views.RecommendView.as_view()),
+    path('api/get-user-detail/', views.get_user_info.as_view())
 ]
 
 from django.contrib.auth.models import User

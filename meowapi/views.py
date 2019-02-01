@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.authtoken.models import Token
 
 from meowapi.serializers import UserSerializer, GroupSerializer, ArticleSerializer
 from .models import Article
@@ -54,25 +55,11 @@ class RecommendView(APIView, RetrieveModelMixin):
         return 'WOW'
 
 
-class get_articles_by_theme(APIView):
-    """
-    View to get news by theme name
-    """
+class get_user_info(APIView):
+    permission_classes = (IsAuthenticated,)
 
-    def get(self, theme, format=None):
-        articles = Article.objects.filter(theme=theme)
-        return Response(articles)
+    serializer_class = UserSerializer
 
-
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def api_login(request):
-    username = request.data['username']
-    password = request.data['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-
-        return Response(status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
+    def get(self, requset):
+        user = Token.objects.get(key=requset.auth).user
+        return Response(user)
