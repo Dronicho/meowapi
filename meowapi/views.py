@@ -58,8 +58,10 @@ class RecommendView(APIView, RetrieveModelMixin):
 class get_user_info(APIView):
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = UserSerializer
-
     def get(self, requset):
+        c = {
+            'requset': requset
+        }
         user = Token.objects.get(key=requset.auth).user
-        return Response(user)
+        serializer = UserSerializer(user, context=c)
+        return Response(serializer.data)

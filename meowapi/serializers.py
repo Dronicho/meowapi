@@ -5,7 +5,6 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    password = serializers.CharField(max_length=15)
 
     def create(self, data):
         user = User.objects.create(
@@ -22,7 +21,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'id', 'password', 'first_name', 'last_name')
+        fields = ('username', 'email', 'first_name', 'last_name')
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 
