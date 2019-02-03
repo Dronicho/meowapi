@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.authtoken import views as authviews
@@ -32,8 +34,6 @@ urlpatterns = [
     path('api/get-user-detail/', views.get_user_info.as_view())
 ]
 
-from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 
 for user in User.objects.all():
     Token.objects.get_or_create(user=user)
